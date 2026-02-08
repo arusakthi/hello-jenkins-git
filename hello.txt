@@ -1,1 +1,1 @@
-Hello from GitHub repository
+Hello Jenkins – SCM Poll Trigger Test
