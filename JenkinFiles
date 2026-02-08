@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from Git'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                echo 'Compiling Java code'
+                bat 'javac Hello.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo 'Running Java program'
+                bat 'java Hello'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build successful, archiving artifacts'
+            archiveArtifacts artifacts: '*.class', fingerprint: true
+        }
+
+        failure {
+            echo 'Build failed due to compilation or runtime error'
+        }
+    }
+}
